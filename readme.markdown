@@ -1340,7 +1340,7 @@ render.js:
 var through = require('through');
 var hyperglue = require('hyperglue');
 var fs = require('fs');
-var html = fs.readFileSync(__dirname + '/static/row.html', { encoding: 'utf8' });
+var html = fs.readFileSync(__dirname + '/static/row.html', 'utf8');
 
 module.exports = function () {
     return through(function (line) {
