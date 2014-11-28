@@ -1,7 +1,7 @@
 # stream-handbook
 
 This document covers the basics of how to write [node.js](http://nodejs.org/)
-programs with [streams](http://nodejs.org/docs/latest/api/stream.html).
+programs with [streams](http://nodejs.org/docs/latest/api/stream.html).     
 You also could read a **[chinese edition](https://github.com/jabez128/stream-handbook)**
 
 [![cc-by-3.0](http://i.creativecommons.org/l/by/3.0/80x15.png)](http://creativecommons.org/licenses/by/3.0/)
