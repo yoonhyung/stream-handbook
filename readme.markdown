@@ -499,7 +499,9 @@ If you want to wait for the buffer to empty again, listen for a `'drain'` event.
 
 ## transform
 
-Transform streams are
+Transform streams are a certain type of duplex stream (both readable and writable).
+The distinction is that in Transform streams, the output is in some way calculated
+from the input. 
 
 You might also hear transform streams referred to as "through streams".
 
