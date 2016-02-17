@@ -1,28 +1,20 @@
 # 스트림-핸드북
 
-This document covers the basics of how to write node.js programs with streams.
 
-You also could read a chinese edition
+이 문서는 [스트림](http://nodejs.org/docs/latest/api/stream.html)으로 [node.js](http://nodejs.org/) 프로그램을 작성하는 방법에 대한 기초를 다룹니다.
 
-이 문서는 [node.js](http://nodejs.org/) 프로그램으로 [스트림](http://nodejs.org/docs/latest/api/stream.html)을  어떻게 작성하는지에 기초를 다룹니다.
-
-또한 **[중국어 버전](https://github.com/jabez128/stream-handbook)**으로도 읽을 수 있습니다.
+당신은 또한  **[중국어 버전](https://github.com/jabez128/stream-handbook)**으로도 읽을 수 있습니다.
 
 [![cc-by-3.0](http://i.creativecommons.org/l/by/3.0/80x15.png)](http://creativecommons.org/licenses/by/3.0/)
 
-# node 패키지 원고
+# node packaged manuscript
 
-You can install this handbook with npm. Just do:
-
-당신은 npm으로 이 핸드북을 설치(install)할 수 있습니다. 그냥 해보세요:
+당신은 `npm`을 통해 이 핸드북을 설치할 수 있습니다. 해보세요.
 ```
 npm install -g stream-handbook
 ```
 
-Now you will have a `stream-handbook` command that will open this readme file in
-your `$PAGER`. Otherwise, you may continue reading this document as you are
-presently doing.
-
+이제 당신은 `$PAGER`(리눅스에서 less 명령어 역활)을 통해 readme 파일을 오픈하는 `stream-handbook` 명령어를 가지게 될 것입니다. 이렇게 하지 않으면, 현재 하는 있는것 처럼 이 문서를 계속해서 읽게될 수도 있습니다.
 
 # 소개
 
@@ -56,7 +48,7 @@ Similar to unix, the node stream module's primary composition operator is called
 `.pipe()` and you get a backpressure mechanism for free to throttle writes for
 slow consumers.
 
-스트림(Streams)은 초창기 유닉스로부터 왔고 
+스트림(Streams)은 유닉스 초창기부터 있었고 10년동안 스스로를 증명했었어 
 
 Streams can help to
 [separate your concerns](http://www.c2.com/cgi/wiki?SeparationOfConcerns)
@@ -66,6 +58,8 @@ interface that can be
 You can then plug the output of one stream to the input of another and
 [use libraries](http://npmjs.org) that operate abstractly on streams to
 institute higher-level flow control.
+
+스트림은 너의 관심에 대한 분리를 도울 수 있어.
 
 Streams are an important component of
 [small-program design](https://michaelochurch.wordpress.com/2012/08/15/what-is-spaghetti-code/)
@@ -109,7 +103,7 @@ The user experience is poor too because users will need to wait for the whole
 file to be buffered into memory on your server before they can start receiving
 any contents.
 
-사용자 경험은 아주 형변없겠지. 사용자들이 전체 파일이 너의 서버에서 메모리로 버퍼될때까지 기다릴 필요가 있기 때문에 그것들이 모든 컨텐츠들을 받기 시작하기 전에 말야.
+사용자는 서버 메모리에 전체 파일이 버퍼되는 것을 기다릴 필요가 있기 때문에 사용자 경험은 꽤 형편없을꺼야.
 
 Luckily both of the `(req, res)` arguments are streams, which means we can write
 this in a much better way using `fs.createReadStream()` instead of
@@ -143,7 +137,7 @@ is on a really slow or high-latency connection.
 
 Want compression? There are streaming modules for that too!
 
-압축 원해? 마찬가지로 스트림 모듈이 있어.
+압축을 원해? 압축을 위한 스트리밍 모듈도 있어.
 
 ``` js
 var http = require('http');
@@ -171,14 +165,14 @@ data through wonky non-streaming custom APIs.
 
 Streams make programming in node simple, elegant, and composable.
 
-스트림은 노드에서 프로그래밍을 간단하고, 우아하고, 그리고 작성할 수 있도록 만들지.
+node에서 스트림은 프로그래밍을 간단하고, 우아하고, 그리고 구성할 수 있도록 만들어.
 
 # basics
 
 There are 5 kinds of streams: readable, writable, transform, duplex, and
 "classic".
 
-5 종류의 스트림이 있어: 읽기(readable), 쓰기(writable), 변경(transform), 양방향(duplex), 그리고 "고전(classic)"
+5 가지 종류의 스트림이 있어: 읽기(readable), 쓰기(writable), 변환(transform), 양방향(duplex), 그리고 "클래식(classic)"
 
 ## pipe
 
