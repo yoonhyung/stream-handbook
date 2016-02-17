@@ -1,5 +1,9 @@
 # 스트림-핸드북
 
+This document covers the basics of how to write node.js programs with streams.
+
+You also could read a chinese edition
+
 이 문서는 [node.js](http://nodejs.org/) 프로그램으로 [스트림](http://nodejs.org/docs/latest/api/stream.html)을  어떻게 작성하는지에 기초를 다룹니다.
 
 또한 **[중국어 버전](https://github.com/jabez128/stream-handbook)**으로도 읽을 수 있습니다.
@@ -7,6 +11,8 @@
 [![cc-by-3.0](http://i.creativecommons.org/l/by/3.0/80x15.png)](http://creativecommons.org/licenses/by/3.0/)
 
 # node 패키지 원고
+
+You can install this handbook with npm. Just do:
 
 당신은 npm으로 이 핸드북을 설치(install)할 수 있습니다. 그냥 해보세요:
 ```
@@ -18,13 +24,17 @@ your `$PAGER`. Otherwise, you may continue reading this document as you are
 presently doing.
 
 
-
 # 소개
 
 ```
 "We should have some ways of connecting programs like garden hose--screw in
 another segment when it becomes necessary to massage data in
 another way. This is the way of IO also."
+```
+
+```
+우린 garden hose-screw와 같이 프로그램들을 연결하는 몇몇 방법을 가지고 있어. 
+이것 또한 IO의 방법이지.
 ```
 
 [Doug McIlroy. October 11, 1964](http://cm.bell-labs.com/who/dmr/mdmpipe.html)
@@ -74,7 +84,7 @@ I/O in node is asynchronous, so interacting with the disk and network involves
 passing callbacks to functions. You might be tempted to write code that serves
 up a file from disk like this:
 
-node에서 I/O는 비동기이므로, 디스크와 네트워크사이에 상호작용은 함수(functions)로 callback을 전달하는것을 수반한다. 당신은 이와 같이 디스크로부터 
+node에서 I/O는 비동기이므로, 디스크와 네트워크사이에 상호작용은 함수(functions)로 callback을 전달하는것을 수반한다. 당신은 코드를 작성하고 싶어질 수도 있어, 디스크상에 파일을 올리는 것으로 이와 같이
 
 ``` js
 var http = require('http');
@@ -93,13 +103,19 @@ memory for every request before writing the result back to clients. If
 `data.txt` is very large, your program could start eating a lot of memory as it
 serves lots of users concurrently, particularly for users on slow connections.
 
+이 코드는 작동할꺼야 근데 부피가 커 그리고 모든 요청에 대해서 전체 `data.txt`파일을 메모리로 올리려고 해 클라이언트에게 작성한 결과를 돌려주기전에. 만약 `data.txt`가 매우 크고, 너의 프로그램이 많은 메모리를 잡아먹기 시작한다면 그것이 동시다발적으로 많은 사용자에게 제공함으로써, 특히 느린 연결 사용자에 대해서 말야.
+
 The user experience is poor too because users will need to wait for the whole
 file to be buffered into memory on your server before they can start receiving
 any contents.
 
+사용자 경험은 아주 형변없겠지. 사용자들이 전체 파일이 너의 서버에서 메모리로 버퍼될때까지 기다릴 필요가 있기 때문에 그것들이 모든 컨텐츠들을 받기 시작하기 전에 말야.
+
 Luckily both of the `(req, res)` arguments are streams, which means we can write
 this in a much better way using `fs.createReadStream()` instead of
 `fs.readFile()`:
+
+운좋게 말야 `(req, res)` 인수 둘다 스트림이야. 이것은 의미해 우리가 더 낳은 방법으로 작성할 수 있다는 것을 말야 `fs.readFile()` 대신에 `fs.createReadStream()`을 사용함으로써 말야.
 
 ``` js
 var http = require('http');
@@ -117,11 +133,17 @@ Here `.pipe()` takes care of listening for `'data'` and `'end'` events from the
 file will be written to clients one chunk at a time immediately as they are
 received from the disk.
 
+여기 `.pipe()`는 `'data'` 와 `'end'` 이벤트를 리스닝 하고 있을꺼야 `fs.createReadStream()`부터 말야. 이 코드는 깔끔할 뿐만 아니라 지금 `data.txt` 파일이 작성되어질 수 있어 클리이언트에게 즉각적으로 차례로 한개의 청크로 그것들이 디스크로부터 받음으로써 
+
 Using `.pipe()` has other benefits too, like handling backpressure automatically
 so that node won't buffer chunks into memory needlessly when the remote client
 is on a really slow or high-latency connection.
 
+`.pipe()` 사용은 또다른 이익이 있어, 자동작으로 압력을 반대로 다루는것 같이 말야. 노드가 불필요하게 메모리로 청크들을 버퍼하지 않기 위해서 원격 클라이언트가 정말 느리거나 혹은 높은 지연율의 연결일때 말야.
+
 Want compression? There are streaming modules for that too!
+
+압축 원해? 마찬가지로 스트림 모듈이 있어.
 
 ``` js
 var http = require('http');
@@ -139,35 +161,50 @@ Now our file is compressed for browsers that support gzip or deflate! We can
 just let [oppressor](https://github.com/substack/oppressor) handle all that
 content-encoding stuff.
 
+너의 파일은 gzip과 deflat을 지원하는 브라우저를 위해 압축될 꺼야! 우린 [oppressor](https://github.com/substack/oppressor) 모두를 다루는 것을 허용해. 이건 content-encoding stuff이지.
+
 Once you learn the stream api, you can just snap together these streaming
 modules like lego bricks or garden hoses instead of having to remember how to push
 data through wonky non-streaming custom APIs.
 
+일단 너가 스트림 api를 배우면, 이 스트림 모듈들이 레고 브릭 혹은 가든 호스처럼 딱 맞게 이어지도록 할 수 있어 어떻게 데이터를 push 하는지 기억하는것 대신에 불안정한 비-스트림 사용자 지정 api를 통해서 말이지.
+
 Streams make programming in node simple, elegant, and composable.
+
+스트림은 노드에서 프로그래밍을 간단하고, 우아하고, 그리고 작성할 수 있도록 만들지.
 
 # basics
 
 There are 5 kinds of streams: readable, writable, transform, duplex, and
 "classic".
 
+5 종류의 스트림이 있어: 읽기(readable), 쓰기(writable), 변경(transform), 양방향(duplex), 그리고 "고전(classic)"
+
 ## pipe
 
 All the different types of streams use `.pipe()` to pair inputs with outputs.
 
+각각의 모든 스트림 타입은 `.pipe()`를 사용해 입력과 출력 짝으로 이루어진.
+
 `.pipe()` is just a function that takes a readable source stream `src` and hooks
 the output to a destination writable stream `dst`:
+
+`.pipe()`는 그냥 함수(function)야. 이 함수는 읽기 소스 스트림 `src`하고 목적지 쓰기 스트림 `dst`에 대한  출력을 가로채.
 
 ```
 src.pipe(dst)
 ```
 
-`.pipe(dst)` returns `dst` so that you can chain together multiple `.pipe()`
-calls together:
+`.pipe(dst)` returns `dst` so that you can chain together multiple `.pipe()` calls together:
+
+`.pipe(dst)`는 `dst`를 반환해 너가 다수의 `.pipe()`를 체인으로 호출할 수 있게:
 
 ``` js
 a.pipe(b).pipe(c).pipe(d)
 ```
 which is the same as:
+
+이는 동일해:
 
 ``` js
 a.pipe(b);
@@ -178,11 +215,15 @@ c.pipe(d);
 This is very much like what you might do on the command-line to pipe programs
 together:
 
+이건 꽤 비슷해 너가 커맨드 라인상에서 파이프 프로그램에게 하는것과 같이 말야.
+
 ```
 a | b | c | d
 ```
 
 except in node instead of the shell!
+
+노드에서는 제외되는 대신에 쉘에서는 말야.
 
 ## readable streams
 
