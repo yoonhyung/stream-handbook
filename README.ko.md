@@ -35,7 +35,7 @@ another way. This is the way of IO also."
 
 ***
 
-스트림은 [unix 초창기](http://www.youtube.com/watch?v=tc4ROCJYbm0)부터 있었습니다. 그리고 수십년동안 [한 가지 동작을 잘 수행 ](http://www.faqs.org/docs/artu/ch01s06.html)하는 작은 컴포넌트에서 대규모 시스템을 구성하는 신뢰할 수 있는 방법으로 자신을 증명해왔습니다. unix에서 스트림은 shell의 `|`로 실행되었습니다. node에서는 내장된(built-in) [스트림 모듈](http://nodejs.org/docs/latest/api/stream.html)이 핵심 라이브러리뿐만 아니라 사용자-영역 모듈로도 사용되어지고 있습니다. unix와 마찬가지고 node의 스트림 모듈의 주요 구성 오퍼레이터는 `.pipe()` 입니다. 그리고 당신은 무상으로 느린 소비되어 쓰이는 것을 조절하기 위한 배압 메커니즘을 얻게 됩니다.
+스트림은 [unix 초창기](http://www.youtube.com/watch?v=tc4ROCJYbm0)부터 있었습니다. 그리고 수십년동안 [한 가지 동작을 잘 수행 ](http://www.faqs.org/docs/artu/ch01s06.html)하는 작은 컴포넌트에서 대규모 시스템을 구성하는 신뢰할 수 있는 방법으로 자신을 증명해왔습니다. unix에서 스트림은 shell의 `|`로 실행되었습니다. node에서는 내장된(built-in) [스트림 모듈](http://nodejs.org/docs/latest/api/stream.html)이 핵심 라이브러리뿐만 아니라 사용자-영역 모듈로도 사용되어지고 있습니다. unix와 마찬가지로, node의 스트림 모듈의 주요 구성 오퍼레이터는 `.pipe()` 입니다. 그리고 당신은 무상으로 느린 소비되어 쓰이는 것을 조절하기 위한 배압 메커니즘을 얻게 됩니다.
 
 Streams can help to
 [separate your concerns](http://www.c2.com/cgi/wiki?SeparationOfConcerns)
@@ -59,13 +59,13 @@ is the enemy and to seek the best abstractions for the problem at hand.
 
 ***
 
-# stream을 사용해야되는 이유
+# 스트림을 사용해야되는 이유
 
 I/O in node is asynchronous, so interacting with the disk and network involves
 passing callbacks to functions. You might be tempted to write code that serves
 up a file from disk like this:
 
-node에서 I/O는 비동기이므로, 디스크와 네트워크사이에 상호작용은 함수(functions)로 callback을 전달하는것을 수반한다. 당신은 코드를 작성하고 싶어질 수도 있어, 디스크상에 파일을 올리는 것으로 이와 같이
+node에서 I/O는 비동기이므로, 디스크와 네트워크의 상호작용은 함수(functions)로 callback을 전달하는 것입니다. 당신은 코드를 작성하고 싶어질 수도 있어, 디스크상에 파일을 올리는 것으로 이와 같이
 
 ``` js
 var http = require('http');
