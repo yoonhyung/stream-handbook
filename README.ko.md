@@ -19,7 +19,7 @@ npm install -g stream-handbook
 # 소개
 
 ```
-"데이터를 다른 방향으로 조작될 필요가 있다면, 정원용 호스-나사처럼 다른 부분으로 프로그램들을 연결하는 여러가지 방법들을 가져야 할 필요가 있습니다. 이것은 IO의 또다른 방법입니다."
+"데이터를 다른 방향으로 조작할 필요가 있다면, 정원용 호스-나사처럼 다른 부분으로 프로그램들을 연결하는 여러가지 방법들을 가져야만 합니다. 이것은 IO의 또다른 방법입니다."
 ```
 
 [Doug McIlroy. October 11, 1964](http://cm.bell-labs.com/who/dmr/mdmpipe.html)
@@ -28,7 +28,7 @@ npm install -g stream-handbook
 
 ***
 
-스트림은 [unix 초창기](http://www.youtube.com/watch?v=tc4ROCJYbm0)부터 있었습니다. 그리고 수십년동안 [한 가지 동작을 잘 수행 ](http://www.faqs.org/docs/artu/ch01s06.html)하는 작은 컴포넌트에서 대규모 시스템을 구성하는 신뢰할 수 있는 방법으로 자신을 증명해왔습니다. unix에서 스트림은 shell의 `|`로 실행되었습니다. node에서는 내장된(built-in) [스트림 모듈](http://nodejs.org/docs/latest/api/stream.html)이 핵심 라이브러리뿐만 아니라 사용자-영역 모듈로도 사용되어지고 있습니다. unix와 마찬가지로, node의 스트림 모듈의 주요 구성 오퍼레이터는 `.pipe()` 입니다. 그리고 당신은 무상으로 느린 소비되어 쓰이는 것을 조절하기 위한 배압 메커니즘을 얻게 됩니다.
+스트림은 [unix 초창기](http://www.youtube.com/watch?v=tc4ROCJYbm0)부터 있었습니다. 그리고 수십년동안 [한 가지 동작을 잘 수행 ](http://www.faqs.org/docs/artu/ch01s06.html)하는 작은 컴포넌트에서 대규모 시스템을 구성하는 신뢰할 수 있는 방법으로 자신을 증명해왔습니다. unix에서 스트림은 shell의 `|`로 실행되었습니다. node에서는 내장된(built-in) [스트림 모듈](http://nodejs.org/docs/latest/api/stream.html)이 핵심 라이브러리뿐만 아니라 사용자-영역 모듈로도 사용되어지고 있습니다. unix와 마찬가지로, node의 스트림 모듈의 주요 구성 오퍼레이터는 `.pipe()` 입니다. 그리고 당신은 무상으로 느리게 소비되어 쓰이는 것을 조절하기 위한 배압 메커니즘을 얻게 됩니다.
 
 Streams can help to
 [separate your concerns](http://www.c2.com/cgi/wiki?SeparationOfConcerns)
@@ -47,6 +47,8 @@ and [unix philosophy](http://www.faqs.org/docs/artu/ch01s06.html)
 but there are many other important abstractions worth considering.
 Just remember that [technical debt](http://c2.com/cgi/wiki?TechnicalDebt)
 is the enemy and to seek the best abstractions for the problem at hand.
+
+스트림은 [small-program design](https://michaelochurch.wordpress.com/2012/08/15/what-is-spaghetti-code/)과 and [unix philosophy](http://www.faqs.org/docs/artu/ch01s06.html)의 중요한 컴포넌트입니다. 하지만 많은 다른 추상적 개념들도 고려할 만한 가치가 있습니다. [technical debt](http://c2.com/cgi/wiki?TechnicalDebt)
 
 ![brian kernighan](http://substack.net/images/kernighan.png)
 
