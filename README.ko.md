@@ -35,20 +35,7 @@ another way. This is the way of IO also."
 
 ***
 
-Streams come to us from the
-[earliest days of unix](http://www.youtube.com/watch?v=tc4ROCJYbm0)
-and have proven themselves over the decades as a dependable way to compose large
-systems out of small components that
-[do one thing well](http://www.faqs.org/docs/artu/ch01s06.html).
-In unix, streams are implemented by the shell with `|` pipes.
-In node, the built-in
-[stream module](http://nodejs.org/docs/latest/api/stream.html)
-is used by the core libraries and can also be used by user-space modules.
-Similar to unix, the node stream module's primary composition operator is called
-`.pipe()` and you get a backpressure mechanism for free to throttle writes for
-slow consumers.
-
-스트림(Streams)은 유닉스 초창기부터 있었고 10년동안 스스로를 증명했었어 
+스트림은 [unix 초창기](http://www.youtube.com/watch?v=tc4ROCJYbm0)부터 있었습니다. 그리고 수십년동안 [한 가지 동작을 잘 수행 ](http://www.faqs.org/docs/artu/ch01s06.html)하는 작은 컴포넌트에서 대규모 시스템을 구성하는 신뢰할 수 있는 방법으로 자신을 증명해왔습니다. unix에서 스트림은 shell의 `|`로 실행되었습니다. node에서는 내장된(built-in) [스트림 모듈](http://nodejs.org/docs/latest/api/stream.html)이 핵심 라이브러리뿐만 아니라 사용자-영역 모듈로도 사용되어지고 있습니다. unix와 마찬가지고 node의 스트림 모듈의 주요 구성 오퍼레이터는 `.pipe()` 입니다. 그리고 당신은 무상으로 느린 소비되어 쓰이는 것을 조절하기 위한 배압 메커니즘을 얻게 됩니다.
 
 Streams can help to
 [separate your concerns](http://www.c2.com/cgi/wiki?SeparationOfConcerns)
