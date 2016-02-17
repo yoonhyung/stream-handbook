@@ -19,14 +19,7 @@ npm install -g stream-handbook
 # 소개
 
 ```
-"We should have some ways of connecting programs like garden hose--screw in
-another segment when it becomes necessary to massage data in
-another way. This is the way of IO also."
-```
-
-```
-우린 garden hose-screw와 같이 프로그램들을 연결하는 몇몇 방법을 가지고 있어. 
-이것 또한 IO의 방법이지.
+"데이터를 다른 방향으로 조작될 필요가 있다면, 정원용 호스-나사처럼 다른 부분으로 프로그램들을 연결하는 여러가지 방법들을 가져야 할 필요가 있습니다. 이것은 IO의 또다른 방법입니다."
 ```
 
 [Doug McIlroy. October 11, 1964](http://cm.bell-labs.com/who/dmr/mdmpipe.html)
